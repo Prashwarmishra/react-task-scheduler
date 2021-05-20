@@ -11,25 +11,36 @@ function App() {
         id: 1,
         text: 'Buy Stationary',
         day: 'May 25th',
-        reminder: 'false',
+        reminder: false,
     },
     {
         id: 2,
         text: 'Vaccine Appointment',
         day: 'May 22nd at 2:00pm',
-        reminder: 'true',
+        reminder: true,
     }, 
     {
         id: 3,
         text: 'Compliance Meeting',
         day: 'May 24th at 9:00am',
-        reminder: 'true',
+        reminder: true,
     }
   ])
 
   const handleDeleteTask = (id) => {
     let items = tasks.filter((task) => task.id !== id);
     setTasks(items);
+  }
+
+  const toggleReminder = (id) => {
+    setTasks(
+      tasks.map((task) => {
+        if(task.id === id){
+          task.reminder = !task.reminder;
+        }
+        return task;
+      })
+    )
   }
 
   return (
@@ -39,6 +50,7 @@ function App() {
           tasks.length > 0 ? <Tasks 
           tasks = {tasks}
           onDelete = {handleDeleteTask}
+          onToggle = {toggleReminder}
         /> : <h3>No tasks to show</h3>
         }
     </div>
