@@ -27,10 +27,20 @@ function App() {
     }
   ])
 
+  const handleDeleteTask = (id) => {
+    let items = tasks.filter((task) => task.id !== id);
+    setTasks(items);
+  }
+
   return (
     <div className="container">
         <Header title = 'Task-Tracker'/>
-        <Tasks tasks = {tasks}/>
+        {
+          tasks.length > 0 ? <Tasks 
+          tasks = {tasks}
+          onDelete = {handleDeleteTask}
+        /> : <h3>No tasks to show</h3>
+        }
     </div>
   );
 }
