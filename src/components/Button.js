@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 
-const Button = ({text, color}) => {
+const Button = ({text, color, onAddToggle}) => {
 
     return (
-        <button style = {{ background: color }} className = 'btn' >
+        <button 
+            style = {{ background: color }} 
+            className = 'btn' 
+            onClick = {onAddToggle}>
             {text}
         </button>
     )

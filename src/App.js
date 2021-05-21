@@ -26,7 +26,15 @@ function App() {
         day: 'May 24th at 9:00am',
         reminder: true,
     }
-  ])
+  ]);
+
+  //state to show the form to add tasks
+  const [showAddTask, setShowAddTask] = useState(false);
+
+  //function to toggle add task form
+  const toggleAddTask = () => {
+    setShowAddTask(!showAddTask);
+  }
 
   //function to add a task
   const addTask = (task) => {
@@ -58,8 +66,12 @@ function App() {
 
   return (
     <div className="container">
-        <Header title = 'Task-Tracker'/>
-        <AddTask onAddTask = {addTask}/>
+        <Header 
+          title = 'Task-Tracker'
+          onAddToggle = {toggleAddTask}
+          showAddTask = {showAddTask}
+        />
+        {showAddTask && <AddTask onAddTask = {addTask}/>}
         {
           tasks.length > 0 ? <Tasks 
           tasks = {tasks}
