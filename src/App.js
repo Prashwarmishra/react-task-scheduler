@@ -3,6 +3,7 @@ import React from 'react';
 import {useState} from 'react';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
+import AddTask from './components/AddTask';
 
 function App() {
 
@@ -27,11 +28,23 @@ function App() {
     }
   ])
 
+  //function to add a task
+  const addTask = (task) => {
+    console.log(task);
+    const newTask = {
+      id: tasks.length+1,
+      ...task,
+    }
+    setTasks([...tasks, newTask]);
+  }
+
+  //function to delete a task
   const handleDeleteTask = (id) => {
     let items = tasks.filter((task) => task.id !== id);
     setTasks(items);
   }
 
+  //function to toggle task reminder
   const toggleReminder = (id) => {
     setTasks(
       tasks.map((task) => {
@@ -46,6 +59,7 @@ function App() {
   return (
     <div className="container">
         <Header title = 'Task-Tracker'/>
+        <AddTask onAddTask = {addTask}/>
         {
           tasks.length > 0 ? <Tasks 
           tasks = {tasks}
